@@ -1,5 +1,7 @@
 // pages/rand_tb_img/rand_tb_img.js
-import {Model} from './model'
+const db = wx.cloud.database()
+const rand_img = db.collection('rand_img')
+import { Model } from './model'
 const model = new Model()
 Page({
 
@@ -7,23 +9,57 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    url_list: []
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    model.get_rand_img().then(res=>{
+  //插入云开发数据库
+  insert_db(url, count) {
+    rand_img.add({
+      data: {
+        url: url
+      }
+    }).then(res => {
+      this.get_url(count)
+    }).catch(err => {
+      this.get_url(count)
+    })
+  },
+  // 获取接口数据
+  get_url(count) {
+    let msg = {}
+    let list = []
+    if (count < 1) {
+      wx.hideLoading()
+      return
+    }
+    wx.showLoading({
+      title: '加载中',
+    })
+    model.get_rand_img().then(res => {
+      msg.url = res.pic_url
+      list = this.data.url_list
+      list.push(msg)
       this.setData({
-        url:res.pic_url
+        url_list: list
       })
-    }).catch(err=>{
+      --count
+      this.insert_db(res.pic_url, count)
+    }).catch(err => {
       wx.showToast({
         title: err,
         icon: 'none'
       })
     })
+  },
+  show_full(e) {    
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.url],
+    })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.get_url(5)
   },
 
   /**
@@ -65,7 +101,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.get_url(5)
   },
 
   /**

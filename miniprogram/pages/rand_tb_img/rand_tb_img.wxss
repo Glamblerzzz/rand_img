@@ -4,7 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .content .img{
   border-radius: 20rpx;
+  margin: 10rpx 0;
 }

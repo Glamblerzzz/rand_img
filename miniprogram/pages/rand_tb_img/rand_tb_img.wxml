@@ -1,4 +1,6 @@
 <!--pages/rand_tb_img/rand_tb_img.wxml-->
 <view class="content">
-  <image src="{{url}}" lazy-load="true" mode="widthFix" class="img"></image>
+  <view wx:for="{{url_list}}">
+    <image data-url="{{item.url}}" src="{{item.url}}" lazy-load="true" mode="widthFix" bindtap="show_full" class="img"></image>
+  </view>
 </view>
