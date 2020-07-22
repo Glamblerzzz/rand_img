@@ -1,4 +1,4 @@
 <!--pages/rand_tb_img/rand_tb_img.wxml-->
 <view class="content">
-  <image src="{{url}}"></image>
+  <image src="{{url}}" class=""></image>
 </view>
