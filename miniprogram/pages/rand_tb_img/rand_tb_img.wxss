@@ -1,1 +1,10 @@
 /* pages/rand_tb_img/rand_tb_img.wxss */
+.content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content .img{
+  border-radius: 20rpx;
+}

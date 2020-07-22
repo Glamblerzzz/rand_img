@@ -1,4 +1,6 @@
 // pages/rand_tb_img/rand_tb_img.js
+import {Model} from './model'
+const model = new Model()
 Page({
 
   /**
@@ -12,16 +14,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.request({
-      url: 'https://api.66mz8.com/api/rand.tbimg.php?format=json',
-      success: res => {
-        console.log(res.data.pic_url);
-        this.setData({
-          url: res.data.pic_url
-        })
-      }
-    }
-    )
+    // wx.request({
+    //   url: 'https://api.66mz8.com/api/rand.tbimg.php?format=json',
+    //   success: res => {
+    //     console.log(res.data.pic_url);
+    //     this.setData({
+    //       url: res.data.pic_url
+    //     })
+    //   },
+    //   fail:err=>{
+    //     wx.showToast({
+    //       title: err,
+    //       icon: 'none'
+    //     })
+    //   }
+    // })
+    model.get_rand_img().then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })
+    })
   },
 
   /**

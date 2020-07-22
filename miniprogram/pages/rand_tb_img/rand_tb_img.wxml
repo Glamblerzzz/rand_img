@@ -1,4 +1,4 @@
 <!--pages/rand_tb_img/rand_tb_img.wxml-->
 <view class="content">
-  <image src="{{url}}" class="img"></image>
+  <image src="{{url}}" lazy-load="true" mode="widthFix" class="img"></image>
 </view>
