@@ -14,23 +14,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.request({
-    //   url: 'https://api.66mz8.com/api/rand.tbimg.php?format=json',
-    //   success: res => {
-    //     console.log(res.data.pic_url);
-    //     this.setData({
-    //       url: res.data.pic_url
-    //     })
-    //   },
-    //   fail:err=>{
-    //     wx.showToast({
-    //       title: err,
-    //       icon: 'none'
-    //     })
-    //   }
-    // })
     model.get_rand_img().then(res=>{
-      console.log(res)
+      this.setData({
+        url:res.pic_url
+      })
     }).catch(err=>{
       wx.showToast({
         title: err,

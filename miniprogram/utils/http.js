@@ -4,8 +4,9 @@ export class HTTP {
     method = "GET",
     data = {},
   }) {
+
     const promise = new Promise((resolve, reject) => {
-      let url = `https://api.66mz8.com/api${url}`
+      url = 'https://api.66mz8.com/api' + url
       wx.request({
         url,
         data,
@@ -13,10 +14,10 @@ export class HTTP {
         header: {
           'Content-Type': 'json'
         },
-        success: res => {
+        success: res => {          
           const statusCode = res.statusCode.toString();
-          if (statusCode.startsWith("2")) {
-            let data = JSON.parse(res.data)
+          if (statusCode.startsWith("2")) {            
+            let data = res.data
             if (data.code == 200) {
               resolve(data)
             } else {
@@ -31,8 +32,8 @@ export class HTTP {
           this._show_error();
         }
       })
-      return promise;
     })
+    return promise;
   }
   _show_error() {
     wx.showToast({
